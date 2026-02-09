@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "LoLFinder",
+  "name": "LoLFinder — Find your next main",
   "icons": [
     {
       "src": "favicon.ico",

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LoLFinder - Module 4</title>
+    <link rel="stylesheet" href="graffiti.css" />
+    <script
+      src="https://kit.fontawesome.com/bce056a055.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+    ></script>
+    <script type="text/javascript">
+      (function () {
+        emailjs.init({
+          publicKey: "KlYEFYGMFvJzU9N9N",
+        });
+      })();
+    </script>
+  </head>
+
+  <body>
+    <header class="hero">
+      <nav class="nav">
+        <div class="nav__container">
+          <div class="nav__brand">LoLFinder</div>
+
+          <button class="nav__toggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <button
+            id="themeToggle"
+            class="theme-toggle"
+            type="button"
+            aria-label="Toggle dark mode"
+          >
+            <i class="fa-solid fa-moon"></i>
+          </button>
+
+          <ul class="nav__links">
+            <li>
+              <a href="#browse" class="nav__link nav__link--active">Browse</a>
+            </li>
+            <li><a href="#about" class="nav__link">About</a></li>
+            <li><a href="#contact" class="nav__link">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Mobile menu -->
+        <div class="nav__mobile" id="nav-mobile">
+          <a href="#browse" class="nav__mobile-link">Browse</a>
+          <a href="#about" class="nav__mobile-link">About</a>
+          <a href="#contact" class="nav__mobile-link">Contact</a>
+        </div>
+      </nav>
+      <div class="hero__content">
+        <div class="hero__inner container">
+          <h1>Browse our champions</h1>
+          <p class="hero__subtitle">
+            Find your next main by name, role, difficulty and more.
+          </p>
+          <form class="hero__search" onsubmit="event.preventDefault();">
+            <div class="hero__search-input-wrapper">
+              <input
+                id="search-input"
+                type="text"
+                placeholder="Search by champion name..."
+                autocomplete="off"
+              />
+              <button type="button" class="hero__search-btn">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </header>
+    <main id="browse" class="main">
+      <section class="filters">
+        <div class="container filters__container">
+          <div class="filters__group">
+            <label for="sort-select">Sort by:</label>
+            <select id="sort-select">
+              <option value="name-asc">Name (A-Z)</option>
+              <option value="name-desc">Name (Z-A)</option>
+              <option value="difficulty-asc">Difficulty (high → low)</option>
+              <option value="difficulty-desc">Difficulty (low → high)</option>
+            </select>
+          </div>
+          <div class="filters__group filters__group--range">
+            <label for="difficulty-range">
+              Max difficulty:
+              <span id="difficulty-value">10</span>
+            </label>
+            <input
+              id="difficulty-range"
+              type="range"
+              min="1"
+              max="10"
+              value="10"
+            />
+          </div>
+          <div class="filters__group">
+            <label for="role-filter">Role:</label>
+            <select id="role-filter">
+              <option value="">All</option>
+              <option value="Assassin">Assassin</option>
+              <option value="Fighter">Fighter</option>
+              <option value="Mage">Mage</option>
+              <option value="Marksman">Marksman</option>
+              <option value="Support">Support</option>
+              <option value="Tank">Tank</option>
+            </select>
+          </div>
+        </div>
+      </section>
+      <section class="results">
+        <div class="container">
+          <div class="results__header">
+            <h2>Search results</h2>
+            <p id="results-count" class="results__count"></p>
+          </div>
+
+          <div
+            id="skeletonGrid"
+            class="card-grid skeleton-grid"
+            aria-hidden="true"
+          ></div>
+
+          <div id="champion-list" class="card-grid"></div>
+
+          <p class="disclaimer">
+            Not affiliated with Riot Games. For educational use only.
+          </p>
+        </div>
+      </section>
+      <section id="about" class="info-section info-section--about">
+        <div class="container about">
+          <div class="about__grid">
+            <div class="about__copy">
+              <p class="about__eyebrow">About</p>
+              <h2 class="about__title">About LoLFinder</h2>
+              <p class="about__desc">
+                LoLFinder uses Riot&#39;s public Data Dragon service to display
+                champion information such as roles, difficulty, and base stats.
+                This project was built to demonstrate API consumption, search,
+                sorting, filtering, and responsive UI design in vanilla
+                HTML/CSS/JavaScript.
+              </p>
+
+              <div class="about__bullets">
+                <div class="about__bullet">
+                  <span class="about__icon"
+                    ><i class="fa-solid fa-bolt"></i
+                  ></span>
+                  <div>
+                    <h3>Fast discovery</h3>
+                    <p>
+                      Search champions by name with debounced input for smoother
+                      UX.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="about__bullet">
+                  <span class="about__icon"
+                    ><i class="fa-solid fa-sliders"></i
+                  ></span>
+                  <div>
+                    <h3>Filters that matter</h3>
+                    <p>
+                      Sort, filter by role, and cap difficulty to find your next
+                      main.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="about__bullet">
+                  <span class="about__icon"
+                    ><i class="fa-solid fa-mobile-screen"></i
+                  ></span>
+                  <div>
+                    <h3>Responsive by default</h3>
+                    <p>
+                      Grid layout, mobile nav, and polished UI states across
+                      breakpoints.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <aside class="about__panel">
+              <div class="about__panel-card">
+                <h3 class="about__panel-title">Built with</h3>
+                <div class="about__chips">
+                  <span class="chip">HTML</span>
+                  <span class="chip">CSS</span>
+                  <span class="chip">JavaScript</span>
+                  <span class="chip">CSS Grid</span>
+                  <span class="chip">Data Dragon API</span>
+                </div>
+
+                <div class="about__divider"></div>
+
+                <h3 class="about__panel-title">Project goals</h3>
+                <ul class="about__list">
+                  <li>API fetch + render pipeline</li>
+                  <li>Search + sort + filters</li>
+                  <li>Loading & empty states</li>
+                  <li>Responsive layout system</li>
+                </ul>
+
+                <div class="about__note">
+                  <span class="about__note-badge">Note</span>
+                  <p>
+                    Not affiliated with Riot Games. Data sourced from the public
+                    Data Dragon endpoints.
+                  </p>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="container footer__inner">
+        <span class="footer__brand">LoLFinder</span>
+        <span class="footer__copy"
+          >Dameion Dismuke © 2025 Built for Educational Purposes only</span
+        >
+      </div>
+    </footer>
+    <button id="backToTop" class="back-to-top">
+      <i class="fa-solid fa-arrow-up"></i>
+    </button>
+    <script src="champions.js" defer></script>
+    <!-- CONTACT MODAL -->
+    <div
+      class="modal"
+      id="contactModal"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div class="modal__backdrop" data-modal-close></div>
+
+      <div class="modal__panel" role="document" aria-label="Contact form">
+        <button
+          class="modal__close"
+          type="button"
+          aria-label="Close"
+          data-modal-close
+        >
+          x
+        </button>
+
+        <div class="modal__cols">
+          <div class="modal__left">
+            <h3 class="modal__title modal__title--about">
+              Here's a bit about me.
+            </h3>
+            <h4 class="modal__sub-title modal__sub-title--about">
+              Frontend Software Engineer.
+            </h4>
+            <p class="modal__text">
+              I'm 30-year-old
+              <b class="orange">frontend software developer</b> with a passion
+              for creating engaging and interactive web applications with great
+              user experiences.
+              <br />
+              I currently work on extremely difficult engineering problems and
+              learn from team consisting of some of the most
+              <b class="orange">talented</b> and
+              <b class="orange">experienced</b> software developers every day.
+            </p>
+
+            <div class="modal__languages">
+              <figure class="modal__language">
+                <img
+                  class="modal__language--img"
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/HTML5_Badge.svg/240px-HTML5_Badge.svg.png"
+                  alt=""
+                />
+                <span class="language__name">HTML</span>
+              </figure>
+              <figure class="modal__language">
+                <img
+                  class="modal__language--img"
+                  src="https://cdn.iconscout.com/icon/free/png-256/css-131-722685.png"
+                  alt=""
+                />
+                <span class="language__name">CSS</span>
+              </figure>
+              <figure class="modal__language">
+                <img
+                  class="modal__language--img"
+                  src="https://cdn.iconscout.com/icon/free/png-256/javascript-1-225993.png"
+                  alt=""
+                />
+                <span class="language__name">JavaScript</span>
+              </figure>
+              <figure class="modal__language">
+                <img
+                  class="modal__language--img"
+                  src="https://cdn.iconscout.com/icon/free/png-256/typescript-3521774-2945272.png"
+                  alt=""
+                />
+                <span class="language__name">TypeScript</span>
+              </figure>
+
+              <figure class="modal__language">
+                <img
+                  class="modal__language--img"
+                  src="https://mobx.js.org/img/mobx.png"
+                  alt=""
+                />
+                <span class="language__name">MobX</span>
+              </figure>
+              <figure class="modal__language">
+                <img
+                  class="modal__language--img"
+                  src="https://cdn.iconscout.com/icon/free/png-256/react-3-1175109.png"
+                  alt=""
+                />
+                <span class="language__name">React</span>
+              </figure>
+              <figure class="modal__language">
+                <img
+                  class="modal__language--img"
+                  src="https://cdn.iconscout.com/icon/free/png-256/vue-282497.png"
+                  alt=""
+                />
+                <span class="language__name">Vue</span>
+              </figure>
+              <figure class="modal__language">
+                <img
+                  class="modal__language--img"
+                  src="https://cdn.iconscout.com/icon/free/png-256/nuxt-dot-js-3628959-3030184.png"
+                  alt=""
+                />
+                <span class="language__name">Nuxt</span>
+              </figure>
+            </div>
+          </div>
+
+          <div class="modal__right">
+            <div class="modal__rightTrack" id="contactRightTrack">
+              <div
+                class="modal__rightPane modal__rightPane--form"
+                id="contactFormView"
+              >
+                <h3 class="modal__title">Let's have a chat!</h3>
+                <p class="modal__text modal__text--muted">
+                  I'm currently open to collaboration and improvements.
+                </p>
+
+                <form id="contactForm" class="modal__form">
+                  <label class="modal__label">
+                    Name
+                    <input
+                      class="modal__input"
+                      type="text"
+                      name="name"
+                      placeholder="Your name"
+                      required
+                    />
+                  </label>
+
+                  <label class="modal__label">
+                    Email
+                    <input
+                      class="modal__input"
+                      type="email"
+                      name="email"
+                      placeholder="you@email.com"
+                      required
+                    />
+                  </label>
+
+                  <label class="modal__label">
+                    Message
+                    <textarea
+                      class="modal__textarea"
+                      name="message"
+                      rows="4"
+                      placeholder="What's up?"
+                      required
+                    ></textarea>
+                  </label>
+
+                  <button
+                    id="contactSubmit"
+                    class="modal__submit"
+                    type="submit"
+                  >
+                    <span class="modal__submitText">Send it my way</span>
+                    <span class="modal__submitSpinner" aria-hidden="true">
+                      <i class="fas fa-spinner"></i>
+                    </span>
+                  </button>
+
+                  <p class="modal__hint">I used EmailJS.</p>
+                </form>
+              </div>
+
+              <div
+                class="modal__rightPane modal__rightPane--success"
+                id="contactSuccessView"
+              >
+                <div class="modal__successCard">
+                  <h3 class="modal__successTitle">Thanks for the message!</h3>
+                  <p class="modal__successText">
+                    Looking forward to speaking to you soon.
+                  </p>
+                  <button class="modal__submit" type="button" data-modal-close>
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
