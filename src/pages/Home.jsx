@@ -1,25 +1,20 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-const normalizeChampionId = (raw) => {
-  const v = (raw || "").trim();
-  if (!v) return "";
-  return v
-    .replace(/\s+/g, "")
-    .replace(/[^a-zA-Z0-9]/g, "");
-};
 
 export default function Home() {
   const navigate = useNavigate();
   const [q, setQ] = useState("");
 
-  const champId = useMemo(() => normalizeChampionId(q), [q]);
-
   const goBrowse = () => navigate("/champions");
 
   const goToChampion = () => {
-    if (champId) navigate(`/champions/${champId}`);
-    else navigate("/champions");
+    const search = q.trim();
+
+    if (search) {
+      navigate(`/champions?q=${encodeURIComponent(search)}`);
+    } else {
+      navigate("/champions");
+    }
   };
 
   const onKeyDown = (e) => {
@@ -129,10 +124,7 @@ function LoLFinderIcon({ className = "" }) {
       </g>
 
       {/* “LF” hint mark */}
-      <path
-        d="M18 46 V36 H22 V42 H28 V46 Z"
-        fill="rgba(255,255,255,0.85)"
-      />
+      <path d="M18 46 V36 H22 V42 H28 V46 Z" fill="rgba(255,255,255,0.85)" />
       <path
         d="M30 46 V36 H40 V39 H34 V40.5 H39 V43.5 H34 V46 Z"
         fill="rgba(255,255,255,0.85)"
