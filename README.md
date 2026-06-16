@@ -1,70 +1,99 @@
-# Getting Started with Create React App
+# LoLFinder
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+LoLFinder is a React-based League of Legends champion discovery app built to help users browse champions, filter by role and difficulty, view champion details, and explore related champion recommendations.
 
-## Available Scripts
+The project uses Riot’s Data Dragon API for champion metadata, icons, splash art, and ability data. It also links to Khada’s community 3D model viewer so users can inspect champion models externally.
 
-In the project directory, you can run:
+## Live Demo
 
-### `npm start`
+[Vercel Deployment](https://lo-l-finder-dame.vercel.app)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Project Purpose
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+This project was built as a frontend portfolio application to demonstrate practical React development, API integration, client-side routing, responsive UI behavior, and polished visual design.
 
-### `npm test`
+LoLFinder focuses on turning a familiar gaming interest into a functional, interactive web application with real-world frontend patterns.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Features
 
-### `npm run build`
+- Browse League of Legends champions
+- Filter champions by role
+- Filter champions by difficulty
+- Search champion names
+- Toggle between square champion icons and vertical champion artwork
+- View individual champion detail pages
+- Display champion lore, stats, passive, and abilities
+- Show recommended champions based on shared tags and difficulty proximity
+- Link to external 3D champion models through Khada’s model viewer
+- Responsive navigation with a mobile hamburger menu
+- Skeleton loading states for a smoother user experience
+- Custom LoLFinder branding, favicon, and visual theme
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Tech Stack
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- React
+- JavaScript
+- React Router
+- HTML
+- CSS
+- Riot Data Dragon API
+- GitHub Pages
+- Vercel
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## API / Data Sources
 
-### `npm run eject`
+### Riot Data Dragon
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+LoLFinder uses Riot’s Data Dragon API to retrieve champion data, including:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Champion names
+- Champion titles
+- Champion roles/tags
+- Champion difficulty values
+- Champion icons
+- Splash/loading artwork
+- Passive and ability information
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Khada / Model Viewer
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Champion detail pages include external links to Khada’s community model viewer so users can view 3D champion models.
 
-## Learn More
+## What I Built
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+This app includes several frontend patterns that are important in production-style React work:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Client-side routing with React Router
+- Dynamic route-based detail pages
+- Data fetching from an external public API
+- Reusable UI components
+- Component-level state management
+- Search and filtering logic
+- Loading and skeleton UI states
+- Responsive layout behavior
+- Mobile navigation
+- Custom visual theme and branding
+- Deployment-ready build configuration
 
-### Code Splitting
+## Key Components
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```txt
+src/
+  components/
+    ChampionCard.jsx
+    FilterBar.jsx
+    NavBar.jsx
+    RecommendedRow.jsx
+    ModalShell.jsx
+    About.jsx
+    Contact.jsx
 
-### Analyzing the Bundle Size
+  pages/
+    Home.jsx
+    Champions.jsx
+    ChampionDetails.jsx
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+  services/
+    ddragon.js
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  styles/
+    graffiti.css
